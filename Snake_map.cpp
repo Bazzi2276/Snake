@@ -8,7 +8,6 @@ bool waitRandomWall = 1;
 int forRandomWall = 5;
 int gate[2][GATE_SIZE] = { { 0, 0 }, { 0, 0 } };
 int map[MAP_SIZE][MAP_SIZE];
-
 void map_init(int stage) {
     for (int i = 0; i < MAP_SIZE; i++) {
         for (int j = 0; j < MAP_SIZE; j++) {
@@ -93,21 +92,23 @@ void findImmuneWall() {
 
 // wall중에서 Gate 생성
 void makeGate() {
-    int x1, y1, x2, y2;
+    int x1 = rand() % MAP_SIZE;
+    int y1 = rand() % MAP_SIZE;
 
-    do
-    {
+    int x2 = rand() % MAP_SIZE;
+    int y2 = rand() % MAP_SIZE;
+
+    while (map[y1][x1] != 2) {
         x1 = rand() % MAP_SIZE;
         y1 = rand() % MAP_SIZE;
-    } while (map[y1][x1] != 2);
+    }
 
     map[y1][x1] = GATE;
 
-    do
-    {
+    while (map[y2][x2] != 2) {
         x2 = rand() % MAP_SIZE;
         y2 = rand() % MAP_SIZE;
-    } while (map[y2][x2] != 2);
+    }
 
     map[y2][x2] = GATE;
 
@@ -117,7 +118,6 @@ void makeGate() {
     gate[1][1] = x2;
 }
 
-// white중에서 RandomWall 생성
 void makeRandomWall()
 {
     for (size_t i = 0; i < 15; i++)
@@ -132,5 +132,5 @@ void makeRandomWall()
 
         map[y1][x1] = 2;
     }
-    
+
 }
