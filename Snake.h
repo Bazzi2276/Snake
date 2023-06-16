@@ -20,6 +20,7 @@ public:
     std::deque<std::pair<int, int> > getBody();
     int getLength();
     bool turnDirection(int key);
+    void setSyncTime(float value);
     void movebyDoor();
     //move 함수를 통해 item과 door만났을 때 모두 처리
     bool move(Point *p, Item* item);

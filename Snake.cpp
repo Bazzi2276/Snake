@@ -3,7 +3,7 @@
 #include "Snake.h"
 
 using namespace std;
-
+extern float SYNC_TIME;
 Snake::Snake() {
     curDirection = WEST;
     length = 3;
@@ -29,7 +29,9 @@ bool Snake::turnDirection(int key) {
     curDirection = key;
     return true;
 }
-
+void Snake::setSyncTime(float value) {
+    SYNC_TIME = value;
+}
 
 //현재 방향을 기준으로 움직임
 bool Snake::move(Point* p, Item* item) {
@@ -51,8 +53,6 @@ bool Snake::move(Point* p, Item* item) {
         p->addGrowItem();
         p->addCurrentLength();
         item->removeItem(heady, headx);
-
-
         map[pop_fronty][pop_frontx] = 4;
         length++;// 바디값이 늘어난 것을 명시, item 클래스에 바디 길이를 체크할 때 활용하기 때문에.
     }
@@ -67,6 +67,27 @@ bool Snake::move(Point* p, Item* item) {
         body.pop_front();
         map[body_lasty][body_lastx] = 0;
         length--;
+    }
+    //새 아이템 추가
+        // 틱 올라가는 코드 추가
+    else if (map[heady][headx] == 8){
+        //point의 growitem 증가
+        p->addGrowItem();
+        p->addCurrentLength();
+        item->removeItem(heady, headx);
+        map[pop_fronty][pop_frontx] = 4;
+        length++;
+        int imp=rand() % 3 ;
+        if(imp == 0) {
+            setSyncTime(0.17);
+        }
+        else if(imp ==1){
+            setSyncTime(0.2);
+        }
+        else{
+            setSyncTime(0.3);
+        }
+
     }
     else {
         body.pop_front();

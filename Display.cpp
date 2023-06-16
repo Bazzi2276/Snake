@@ -39,6 +39,10 @@ void draw_snakewindow(WINDOW* snake_win) {
                 wattron(snake_win, COLOR_PAIR(GATE));
                 mvwprintw(snake_win, i, j * 2, "  ");
             }
+            else if (map[i - 4][j - 4] == X_ITEM) {  // new item
+                wattron(snake_win, COLOR_PAIR(2));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
         }
     }
     wrefresh(snake_win);
@@ -62,6 +66,7 @@ void colorSetting() {
     init_pair(11, COLOR_BLACK, COLOR_RED);
     init_color(COLOR_BLUE, 500, 500, 500);
     init_pair(12, COLOR_BLUE, COLOR_BLUE);
+    init_pair(15, COLOR_BLACK, COLOR_BLACK);
 
 }
 

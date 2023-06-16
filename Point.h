@@ -9,6 +9,8 @@ private:
     int growItem;
     int poisonItem;
     int useGate;
+
+    int xitem;
 public:
     Point();
     int getCurrentLength();
