@@ -3,9 +3,9 @@
 
 int stage = 0;
 bool waitGate = 1;
-int forGate = 5;
+int forGate = 7;
 bool waitRandomWall = 1;
-int forRandomWall = 7;
+int forRandomWall = 5;
 int gate[2][GATE_SIZE] = { { 0, 0 }, { 0, 0 } };
 int map[MAP_SIZE][MAP_SIZE];
 
@@ -120,7 +120,7 @@ void makeGate() {
 // white중에서 RandomWall 생성
 void makeRandomWall()
 {
-    for (size_t i = 0; i < 8; i++)
+    for (size_t i = 0; i < 15; i++)
     {
         int x1, y1;
 
@@ -128,9 +128,9 @@ void makeRandomWall()
         {
             x1 = rand() % MAP_SIZE;
             y1 = rand() % MAP_SIZE;
-        } while (map[y1][x1] == 0);
+        } while (map[y1][x1] != 0);
 
-        map[y1][x1] = WALL;
+        map[y1][x1] = 2;
     }
     
 }
