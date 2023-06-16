@@ -5,6 +5,7 @@
 #ifndef __ITEM__
 #define __ITEM__
 
+
 struct ItemValue{
     int y, x;
     clock_t time;

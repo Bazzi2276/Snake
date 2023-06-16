@@ -8,8 +8,13 @@ Item::Item() {
 void Item::produceItem() {
     if (total_item < 3) {
         //현재 총 아이템이 3개 미만이라면 랜덤으로 poision이나 growth중 새로운 아이템 생성
-        int newItem = (rand() % 2) + 5;
-        
+        int  newItem =0;
+        if (rand() % 3 == 0){   //rand()%3 은 0,1,2 중 하나임
+            newItem = 8;
+        }else{
+            newItem = (rand() % 2) + 5;
+        }
+
         //item이 언제생성되었는지 기록
         clock_t now = clock();
 

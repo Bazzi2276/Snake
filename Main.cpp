@@ -1,9 +1,10 @@
+
 #include "Snake.h"
 #include "Snake_map.h"
 #include "Display.h"
 #include "Item.h"
 #include "keyboardEventhandler.h"
-#define SYNC_TIME 0.3
+float SYNC_TIME = 0.3;
 
 using namespace std;
 
@@ -27,7 +28,7 @@ int main() {
     mvprintw(1, 1, "SNAKE GAME");
     refresh();
 
-    //snake win 생성 
+    //snake win 생성
     snake_win = newwin(30, 60, 3, 3);
     wbkgd(snake_win, COLOR_PAIR(1));
     wattron(snake_win, COLOR_PAIR(8));
@@ -37,7 +38,7 @@ int main() {
     wrefresh(snake_win);
 
 
-    //point win 생성 
+    //point win 생성
     point_win = newwin(15, 29, 3, 64);
     wbkgd(point_win, COLOR_PAIR(1));
     wattron(point_win, COLOR_PAIR(8));
@@ -46,7 +47,7 @@ int main() {
     updatePoint(point_win, p);
     wrefresh(point_win);
 
-    //mission win 생성 
+    //mission win 생성
     mission_win = newwin(15, 29, 18, 64);
     wbkgd(mission_win, COLOR_PAIR(1));
     wattron(mission_win, COLOR_PAIR(8));
@@ -96,7 +97,7 @@ int main() {
                 makeGate();
                 waitGate = false;
             }
-            
+
             // RandomWall은 몸의 최대길이가 forRandomWall을 초과하면 나타나게 한다.
             if ( p->getMaxLength() > forRandomWall && waitRandomWall)
             {
