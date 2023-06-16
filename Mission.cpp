@@ -3,8 +3,8 @@
 
 Mission::Mission() {
     B = 7;
-    growItem = 1;
-    poisonItem = 1;
+    growItem = 3;
+    poisonItem = 2;
     useGate = 1;
 
     Bflag = false;
