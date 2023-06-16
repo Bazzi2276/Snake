@@ -4,6 +4,7 @@
 int stage = 0;
 bool waitGate = 1;
 int forGate = 5;
+bool waitRandomWall = 1;
 int gate[2][GATE_SIZE] = { { 0, 0 }, { 0, 0 } };
 int map[MAP_SIZE][MAP_SIZE];
 
@@ -91,23 +92,21 @@ void findImmuneWall() {
 
 // wall중에서 Gate 생성
 void makeGate() {
-    int x1 = rand() % MAP_SIZE;
-    int y1 = rand() % MAP_SIZE;
+    int x1, y1, x2, y2;
 
-    int x2 = rand() % MAP_SIZE;
-    int y2 = rand() % MAP_SIZE;
-
-    while (map[y1][x1] != 2) {
+    do
+    {
         x1 = rand() % MAP_SIZE;
         y1 = rand() % MAP_SIZE;
-    }
+    } while (map[y1][x1] != 2);
 
     map[y1][x1] = GATE;
 
-    while (map[y2][x2] != 2) {
+    do
+    {
         x2 = rand() % MAP_SIZE;
         y2 = rand() % MAP_SIZE;
-    }
+    } while (map[y2][x2] != 2);
 
     map[y2][x2] = GATE;
 
@@ -115,4 +114,22 @@ void makeGate() {
     gate[0][1] = x1;
     gate[1][0] = y2;
     gate[1][1] = x2;
+}
+
+// Snake의 길이가 maxLenth의 절반만큼 도달 시 랜덤으로 몇몇 바닥이 벽으로 변함.
+void makeRandomWall()
+{
+    for (size_t i = 0; i < 8; i++)
+    {
+        int x1, y1;
+
+        do
+        {
+            x1 = rand() % MAP_SIZE;
+            y1 = rand() % MAP_SIZE;
+        } while (map[y1][x1] == 0);
+
+        map[y1][x1] = WALL;
+    }
+    
 }

@@ -91,10 +91,17 @@ int main() {
             updatePoint(point_win, p);
             updateMission(mission_win, m, p);
 
-            //gate는 몸의 최대길이가 forGate을 초과하면 나타나게한다.
+            //gate는 몸의 최대길이가 forGate을 초과하면 나타나게 한다.
             if((p->getMaxLength()>forGate) && waitGate){
                 makeGate();
                 waitGate = false;
+            }
+            
+            // RandomWall은 몸의 현재길이가 최대길의의 절반에 도달했을 때 나타나게 한다.
+            if ( p->getCurrentLength() > p->getMaxLength() / 2 && waitRandomWall)
+            {
+                makeRandomWall();
+                waitRandomWall = false;
             }
 
             //stage를 모두 clear했을 때
@@ -116,6 +123,7 @@ int main() {
                 m = new Mission();
                 item = new Item();
                 waitGate = true;
+                waitRandomWall = true;
 
                 map_init(stage);
                 //아무키 누르면 다음 스테이지 시작
