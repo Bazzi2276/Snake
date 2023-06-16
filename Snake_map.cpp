@@ -5,6 +5,7 @@ int stage = 0;
 bool waitGate = 1;
 int forGate = 5;
 bool waitRandomWall = 1;
+int forRandomWall = 7;
 int gate[2][GATE_SIZE] = { { 0, 0 }, { 0, 0 } };
 int map[MAP_SIZE][MAP_SIZE];
 
@@ -116,7 +117,7 @@ void makeGate() {
     gate[1][1] = x2;
 }
 
-// Snake의 길이가 maxLenth의 절반만큼 도달 시 랜덤으로 몇몇 바닥이 벽으로 변함.
+// white중에서 RandomWall 생성
 void makeRandomWall()
 {
     for (size_t i = 0; i < 8; i++)

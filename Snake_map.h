@@ -9,7 +9,8 @@ enum color {WHITE, IMMUNE_WALL, WALL, SNAKE_HEAD, SNAKE_BODY, GROWTH_ITEM, POISO
 extern int stage;
 extern bool waitGate;
 extern int forGate;
-extern bool waitRandomWall
+extern bool waitRandomWall;
+extern int forRandomWall;
 extern int gate[][GATE_SIZE];
 extern int map[MAP_SIZE][MAP_SIZE];
 extern int map1[][GATE_SIZE];

@@ -97,8 +97,8 @@ int main() {
                 waitGate = false;
             }
             
-            // RandomWall은 몸의 현재길이가 최대길의의 절반에 도달했을 때 나타나게 한다.
-            if ( p->getCurrentLength() > p->getMaxLength() / 2 && waitRandomWall)
+            // RandomWall은 몸의 최대길이가 forRandomWall을 초과하면 나타나게 한다.
+            if ( p->getCurrentLength() > forRandomWall && waitRandomWall)
             {
                 makeRandomWall();
                 waitRandomWall = false;
