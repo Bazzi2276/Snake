@@ -33,22 +33,18 @@ void draw_snakewindow(WINDOW* snake_win) {
             if (map[i - 4][j - 4] == 0) { //white(빈칸)
                 wattron(snake_win, COLOR_PAIR(1));
                 mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(1));
             }
             else if (map[i - 4][j - 4] == 1) { //Immune wall
                 wattron(snake_win, COLOR_PAIR(2));
                 mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(2));
             }
             else if (map[i - 4][j - 4] == WALL) { //wall
                 wattron(snake_win, COLOR_PAIR(12));
                 mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(2));
             }
             else if (map[i - 4][j - 4] == SNAKE_HEAD) {  //head of snake
                 wattron(snake_win, COLOR_PAIR(SNAKE_HEAD));
                 mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(3));
             }
             else if (map[i - 4][j - 4] == SNAKE_BODY) {  //body of snake
                 wattron(snake_win, COLOR_PAIR(SNAKE_BODY));
