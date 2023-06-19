@@ -15,20 +15,16 @@ int main() {
     Point* p = new Point();
     Mission* m = new Mission();
     Item* item = new Item();
-
     srand(time(NULL));
     setlocale(LC_ALL, "");
-
     map_init(stage);
     initscr();
     resize_term(60, 100);
-
     colorSetting();
     border('*', '*', '*', '*', '*', '*', '*', '*');
     mvprintw(1, 1, "SNAKE GAME");
     refresh();
 
-    //snake win 생성
     snake_win = newwin(30, 60, 3, 3);
     wbkgd(snake_win, COLOR_PAIR(1));
     wattron(snake_win, COLOR_PAIR(8));
@@ -38,7 +34,6 @@ int main() {
     wrefresh(snake_win);
 
 
-    //point win 생성
     point_win = newwin(15, 29, 3, 64);
     wbkgd(point_win, COLOR_PAIR(1));
     wattron(point_win, COLOR_PAIR(8));
@@ -47,7 +42,7 @@ int main() {
     updatePoint(point_win, p);
     wrefresh(point_win);
 
-    //mission win 생성
+
     mission_win = newwin(15, 29, 18, 64);
     wbkgd(mission_win, COLOR_PAIR(1));
     wattron(mission_win, COLOR_PAIR(8));
@@ -56,7 +51,7 @@ int main() {
     updateMission(mission_win, m, p);
 
 
-    //키입력을 block되지 않고 받기 위함
+
     keypad(stdscr, TRUE);
     curs_set(0);
     noecho();
@@ -69,13 +64,11 @@ int main() {
 
     int cnt = 0;
     while (1) {
-        //방향키 입력을 통해 Snake 방향 바꾸기 , 키입력을 진행방향과 반대로하면 바로 게임 끝
         if (!keyEventHandler(sk)) {
             displayDead(notice_win);
             break;
         }
 
-        //일정 시간간격 마다 display
         endClock = clock();
         if ((float)(endClock - startClock) / CLOCKS_PER_SEC >= SYNC_TIME) {
             //Snake is dead
@@ -84,28 +77,22 @@ int main() {
                 break;
             }
 
-            //item 생성 및 제거
             item->removeItem();
             item->produceItem();
 
             startClock = endClock;
             updatePoint(point_win, p);
             updateMission(mission_win, m, p);
-
-            //gate는 몸의 최대길이가 forGate을 초과하면 나타나게 한다.
             if((p->getMaxLength()>forGate) && waitGate){
                 makeGate();
                 waitGate = false;
             }
 
-            // RandomWall은 몸의 최대길이가 forRandomWall을 초과하면 나타나게 한다.
             if ( p->getMaxLength() > forRandomWall && waitRandomWall)
             {
                 makeRandomWall();
                 waitRandomWall = false;
             }
-
-            //stage를 모두 clear했을 때
             if (m->checkStageClear() && stage == 4) {
                 displayGameClear(notice_win);
                 break;
@@ -127,7 +114,6 @@ int main() {
                 waitRandomWall = true;
 
                 map_init(stage);
-                //아무키 누르면 다음 스테이지 시작
                 cin.ignore(2, '\n');
             }
 
