@@ -1,5 +1,6 @@
 #include "Display.h"
 
+
 void colorSetting() {
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_WHITE);
@@ -19,30 +20,9 @@ void colorSetting() {
     init_pair(15, COLOR_BLACK, COLOR_BLACK);
 
 }
-void displayGameClear(WINDOW* notice_win) {
-    notice_win = newwin(8, 20, 15,22);
-    wbkgd(notice_win, COLOR_PAIR(10));
-    wattron(notice_win, COLOR_PAIR(10));
-    mvwprintw(notice_win, 2, 2, "Congratulations!");
-    mvwprintw(notice_win, 3, 2, "ALL Stage Clear!");
-    mvwprintw(notice_win, 4, 4, "Game End!");
-    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
-    wrefresh(notice_win);
-    time_wait(3);
-    delwin(notice_win);
-}
 
-void displayNext(WINDOW* notice_win) {
-    notice_win = newwin(8, 20, 15,22);
-    wbkgd(notice_win, COLOR_PAIR(7));
-    wattron(notice_win, COLOR_PAIR(9));
-    mvwprintw(notice_win, 3, 5, "Next_Stage!");
-    mvwprintw(notice_win, 4, 3, "Press Any Key!");
-    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
-    wrefresh(notice_win);
-    time_wait(2);
-    delwin(notice_win);
-}
+
+
 
 
 void updatePoint(WINDOW* point_win, Point* p) {
@@ -57,26 +37,29 @@ void updatePoint(WINDOW* point_win, Point* p) {
     wrefresh(point_win);
 }
 
+
 void draw_snakewindow(WINDOW* snake_win) {
     for (int i = 4; i < MAP_SIZE + 4; i++) {
         for (int j = 4; j < MAP_SIZE + 4; j++) {
             if (map[i - 4][j - 4] == 0) { //white(빈칸)
                 wattron(snake_win, COLOR_PAIR(1));
                 mvwprintw(snake_win, i, j * 2, "  ");
+                // attroff(COLOR_PAIR(1));
             }
             else if (map[i - 4][j - 4] == 1) { //Immune wall
                 wattron(snake_win, COLOR_PAIR(2));
                 mvwprintw(snake_win, i, j * 2, "  ");
+                // attroff(COLOR_PAIR(2));
             }
             else if (map[i - 4][j - 4] == WALL) { //wall
                 wattron(snake_win, COLOR_PAIR(12));
                 mvwprintw(snake_win, i, j * 2, "  ");
-
+                // attroff(COLOR_PAIR(2));
             }
             else if (map[i - 4][j - 4] == SNAKE_HEAD) {  //head of snake
                 wattron(snake_win, COLOR_PAIR(SNAKE_HEAD));
                 mvwprintw(snake_win, i, j * 2, "  ");
-
+                // attroff(COLOR_PAIR(3));
             }
             else if (map[i - 4][j - 4] == SNAKE_BODY) {  //body of snake
                 wattron(snake_win, COLOR_PAIR(SNAKE_BODY));
@@ -126,17 +109,7 @@ void time_wait(float time){
 }
 
 
-void displayDead(WINDOW* notice_win) {
-    notice_win = newwin(8, 20, 15,22);
-    wbkgd(notice_win, COLOR_PAIR(11));
-    wattron(notice_win, COLOR_PAIR(11));
-    mvwprintw(notice_win, 3, 3, "Snake is Dead!");
-    mvwprintw(notice_win, 4, 5, "Game End!");
-    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
-    wrefresh(notice_win);
-    time_wait(3);
-    delwin(notice_win);
-}
+
 
 void displayNext(WINDOW* notice_win) {
     notice_win = newwin(8, 20, 15,22);
@@ -150,4 +123,26 @@ void displayNext(WINDOW* notice_win) {
     delwin(notice_win);
 }
 
-
+void displayGameClear(WINDOW* notice_win) {
+    notice_win = newwin(8, 20, 15,22);
+    wbkgd(notice_win, COLOR_PAIR(10));
+    wattron(notice_win, COLOR_PAIR(10));
+    mvwprintw(notice_win, 2, 2, "Congratulations!");
+    mvwprintw(notice_win, 3, 2, "ALL Stage Clear!");
+    mvwprintw(notice_win, 4, 4, "Game End!");
+    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(notice_win);
+    time_wait(3);
+    delwin(notice_win);
+}
+void displayDead(WINDOW* notice_win) {
+    notice_win = newwin(8, 20, 15,22);
+    wbkgd(notice_win, COLOR_PAIR(11));
+    wattron(notice_win, COLOR_PAIR(11));
+    mvwprintw(notice_win, 3, 3, "Snake is Dead!");
+    mvwprintw(notice_win, 4, 5, "Game End!");
+    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(notice_win);
+    time_wait(3);
+    delwin(notice_win);
+}
