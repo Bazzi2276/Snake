@@ -1,6 +1,5 @@
 #include "Display.h"
 
-
 void colorSetting() {
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_WHITE);
@@ -20,12 +19,33 @@ void colorSetting() {
     init_pair(15, COLOR_BLACK, COLOR_BLACK);
 
 }
+void displayGameClear(WINDOW* notice_win) {
+    notice_win = newwin(8, 20, 15,22);
+    wbkgd(notice_win, COLOR_PAIR(10));
+    wattron(notice_win, COLOR_PAIR(10));
+    mvwprintw(notice_win, 2, 2, "Congratulations!");
+    mvwprintw(notice_win, 3, 2, "ALL Stage Clear!");
+    mvwprintw(notice_win, 4, 4, "Game End!");
+    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(notice_win);
+    time_wait(3);
+    delwin(notice_win);
+}
 
-
+void displayNext(WINDOW* notice_win) {
+    notice_win = newwin(8, 20, 15,22);
+    wbkgd(notice_win, COLOR_PAIR(7));
+    wattron(notice_win, COLOR_PAIR(9));
+    mvwprintw(notice_win, 3, 5, "Next_Stage!");
+    mvwprintw(notice_win, 4, 3, "Press Any Key!");
+    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(notice_win);
+    time_wait(2);
+    delwin(notice_win);
+}
 
 
 void updatePoint(WINDOW* point_win, Point* p) {
-    //이미 써져있는 것 초기화
     for (int i = 2; i <= 5; i++) {
         mvwprintw(point_win, i, 1, "                  ");
     }
@@ -88,7 +108,6 @@ void updateMission(WINDOW* mission_win, Mission* m, Point* p) {
     for (int i = 2; i <= 5; i++) {
         mvwprintw(mission_win, i, 1, "                  ");
     }
-    //현재 Point와 비교해서 mission 달성 여부 check하기
     m->updateAll(p);
 
     mvwprintw(mission_win, 2, 1, "B: %d (%c)", m->getB(), (m->getBflag() ? 'V' : ' '));
@@ -131,15 +150,4 @@ void displayNext(WINDOW* notice_win) {
     delwin(notice_win);
 }
 
-void displayGameClear(WINDOW* notice_win) {
-    notice_win = newwin(8, 20, 15,22);
-    wbkgd(notice_win, COLOR_PAIR(10));
-    wattron(notice_win, COLOR_PAIR(10));
-    mvwprintw(notice_win, 2, 2, "Congratulations!");
-    mvwprintw(notice_win, 3, 2, "ALL Stage Clear!");
-    mvwprintw(notice_win, 4, 4, "Game End!");
-    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
-    wrefresh(notice_win);
-    time_wait(3);
-    delwin(notice_win);
-}
+
