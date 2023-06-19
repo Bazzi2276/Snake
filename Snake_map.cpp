@@ -1,11 +1,10 @@
 #include <iostream>
 #include "Snake_map.h"
-
+bool waitRandomWall = 1;
+int forRandomWall = 5;
 int stage = 0;
 bool waitGate = 1;
 int forGate = 7;
-bool waitRandomWall = 1;
-int forRandomWall = 5;
 int gate[2][GATE_SIZE] = { { 0, 0 }, { 0, 0 } };
 int map[MAP_SIZE][MAP_SIZE];
 void map_init(int stage) {
@@ -14,7 +13,6 @@ void map_init(int stage) {
             map[i][j] = 0;
         }
     }
-
     for (int i = 0; i < MAP_SIZE; i++) {
         map[i][MAP_SIZE - 1] = WALL;
         map[i][0] = WALL;
@@ -27,7 +25,7 @@ void map_init(int stage) {
     map[MAP_SIZE / 2][MAP_SIZE / 2 - 1] = SNAKE_BODY;
 
 
-    //stage별로 wall 다르게
+
     if (stage == 1) {
         for (int i = 0; i < 10; i++) {
             map[i][8] = 2;
@@ -60,11 +58,11 @@ void map_init(int stage) {
         }
     }
 
-    //immune wall 적용
+
     findImmuneWall();
 }
 
-//wall과 gate가 등장하면 안되는 ImmuneWall 구분
+
 void findImmuneWall() {
     int dy[4] = { 0,1,0,-1 };
     int dx[4] = { 1,0,-1,0 };
@@ -82,7 +80,7 @@ void findImmuneWall() {
                     if (map[ny][nx] != 1 && map[ny][nx] != 2) cnt++;
                 }
 
-                //사방이 wall인 immune wall
+
                 if (cnt == 0) map[i][j] = 1;
             }
         }
@@ -90,7 +88,7 @@ void findImmuneWall() {
 }
 
 
-// wall중에서 Gate 생성
+
 void makeGate() {
     int x1 = rand() % MAP_SIZE;
     int y1 = rand() % MAP_SIZE;
