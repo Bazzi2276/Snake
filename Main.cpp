@@ -8,9 +8,9 @@ float SYNC_TIME = 0.3;
 
 using namespace std;
 
+
 int main() {
     WINDOW* snake_win, * point_win, * mission_win, * notice_win;
-
     Snake sk = Snake();
     Point* p = new Point();
     Mission* m = new Mission();
@@ -24,7 +24,6 @@ int main() {
     border('*', '*', '*', '*', '*', '*', '*', '*');
     mvprintw(1, 1, "SNAKE GAME");
     refresh();
-
     snake_win = newwin(30, 60, 3, 3);
     wbkgd(snake_win, COLOR_PAIR(1));
     wattron(snake_win, COLOR_PAIR(8));
