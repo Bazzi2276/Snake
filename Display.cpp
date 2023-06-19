@@ -1,6 +1,5 @@
 #include "Display.h"
 
-
 void colorSetting() {
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_WHITE);
@@ -20,23 +19,13 @@ void colorSetting() {
     init_pair(15, COLOR_BLACK, COLOR_BLACK);
 
 }
-
-
-
-
-
-void updatePoint(WINDOW* point_win, Point* p) {
-    for (int i = 2; i <= 5; i++) {
-        mvwprintw(point_win, i, 1, "                  ");
+void time_wait(float time){
+    clock_t startClock = clock();
+    clock_t stageWait = clock();
+    while ((float)(stageWait - startClock) / CLOCKS_PER_SEC < time) {
+        stageWait = clock();
     }
-    p->updateMaxLength();
-    mvwprintw(point_win, 2, 1, "B: %d / %d", p->getCurrentLength(), p->getMaxLength());
-    mvwprintw(point_win, 3, 1, "+: %d", p->getGrowItem());
-    mvwprintw(point_win, 4, 1, "-: %d", p->getPoisonItem());
-    mvwprintw(point_win, 5, 1, "G: %d", p->getUseGate());
-    wrefresh(point_win);
 }
-
 
 void draw_snakewindow(WINDOW* snake_win) {
     for (int i = 4; i < MAP_SIZE + 4; i++) {
@@ -87,6 +76,23 @@ void draw_snakewindow(WINDOW* snake_win) {
 }
 
 
+
+
+
+void updatePoint(WINDOW* point_win, Point* p) {
+    for (int i = 2; i <= 5; i++) {
+        mvwprintw(point_win, i, 1, "                  ");
+    }
+    p->updateMaxLength();
+    mvwprintw(point_win, 2, 1, "B: %d / %d", p->getCurrentLength(), p->getMaxLength());
+    mvwprintw(point_win, 3, 1, "+: %d", p->getGrowItem());
+    mvwprintw(point_win, 4, 1, "-: %d", p->getPoisonItem());
+    mvwprintw(point_win, 5, 1, "G: %d", p->getUseGate());
+    wrefresh(point_win);
+}
+
+
+
 void updateMission(WINDOW* mission_win, Mission* m, Point* p) {
     for (int i = 2; i <= 5; i++) {
         mvwprintw(mission_win, i, 1, "                  ");
@@ -100,16 +106,20 @@ void updateMission(WINDOW* mission_win, Mission* m, Point* p) {
     wrefresh(mission_win);
 }
 
-void time_wait(float time){
-    clock_t startClock = clock();
-    clock_t stageWait = clock();
-    while ((float)(stageWait - startClock) / CLOCKS_PER_SEC < time) {
-        stageWait = clock();
-    }
+
+
+
+void displayDead(WINDOW* notice_win) {
+    notice_win = newwin(8, 20, 15,22);
+    wbkgd(notice_win, COLOR_PAIR(11));
+    wattron(notice_win, COLOR_PAIR(11));
+    mvwprintw(notice_win, 3, 3, "Snake is Dead!");
+    mvwprintw(notice_win, 4, 5, "Game End!");
+    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(notice_win);
+    time_wait(3);
+    delwin(notice_win);
 }
-
-
-
 
 void displayNext(WINDOW* notice_win) {
     notice_win = newwin(8, 20, 15,22);
@@ -130,17 +140,6 @@ void displayGameClear(WINDOW* notice_win) {
     mvwprintw(notice_win, 2, 2, "Congratulations!");
     mvwprintw(notice_win, 3, 2, "ALL Stage Clear!");
     mvwprintw(notice_win, 4, 4, "Game End!");
-    wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
-    wrefresh(notice_win);
-    time_wait(3);
-    delwin(notice_win);
-}
-void displayDead(WINDOW* notice_win) {
-    notice_win = newwin(8, 20, 15,22);
-    wbkgd(notice_win, COLOR_PAIR(11));
-    wattron(notice_win, COLOR_PAIR(11));
-    mvwprintw(notice_win, 3, 3, "Snake is Dead!");
-    mvwprintw(notice_win, 4, 5, "Game End!");
     wborder(notice_win, '|', '|', '-', '-', '+', '+', '+', '+');
     wrefresh(notice_win);
     time_wait(3);
