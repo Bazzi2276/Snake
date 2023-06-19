@@ -1,54 +1,5 @@
 #include "Display.h"
 
-void draw_snakewindow(WINDOW* snake_win) {
-    for (int i = 4; i < MAP_SIZE + 4; i++) {
-        for (int j = 4; j < MAP_SIZE + 4; j++) {
-            if (map[i - 4][j - 4] == 0) { //white(빈칸)
-                wattron(snake_win, COLOR_PAIR(1));
-                mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(1));
-            }
-            else if (map[i - 4][j - 4] == 1) { //Immune wall
-                wattron(snake_win, COLOR_PAIR(2));
-                mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(2));
-            }
-            else if (map[i - 4][j - 4] == WALL) { //wall
-                wattron(snake_win, COLOR_PAIR(12));
-                mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(2));
-            }
-            else if (map[i - 4][j - 4] == SNAKE_HEAD) {  //head of snake
-                wattron(snake_win, COLOR_PAIR(SNAKE_HEAD));
-                mvwprintw(snake_win, i, j * 2, "  ");
-                // attroff(COLOR_PAIR(3));
-            }
-            else if (map[i - 4][j - 4] == SNAKE_BODY) {  //body of snake
-                wattron(snake_win, COLOR_PAIR(SNAKE_BODY));
-                mvwprintw(snake_win, i, j * 2, "  ");
-            }
-            else if (map[i - 4][j - 4] == GROWTH_ITEM) {  // growth item
-                wattron(snake_win, COLOR_PAIR(GROWTH_ITEM));
-                mvwprintw(snake_win, i, j * 2, "  ");
-            }
-            else if (map[i - 4][j - 4] == POISON_ITEM) {  //posion item
-                wattron(snake_win, COLOR_PAIR(POISON_ITEM));
-                mvwprintw(snake_win, i, j * 2, "  ");
-            }
-            else if (map[i - 4][j - 4] == GATE) {  //Gate
-                wattron(snake_win, COLOR_PAIR(GATE));
-                mvwprintw(snake_win, i, j * 2, "  ");
-            }
-            else if (map[i - 4][j - 4] == X_ITEM) {  // new item
-                wattron(snake_win, COLOR_PAIR(2));
-                mvwprintw(snake_win, i, j * 2, "  ");
-            }
-        }
-    }
-    wrefresh(snake_win);
-}
-
-
 
 void colorSetting() {
     start_color();
@@ -86,6 +37,51 @@ void updatePoint(WINDOW* point_win, Point* p) {
     wrefresh(point_win);
 }
 
+void draw_snakewindow(WINDOW* snake_win) {
+    for (int i = 4; i < MAP_SIZE + 4; i++) {
+        for (int j = 4; j < MAP_SIZE + 4; j++) {
+            if (map[i - 4][j - 4] == 0) { //white(빈칸)
+                wattron(snake_win, COLOR_PAIR(1));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+            else if (map[i - 4][j - 4] == 1) { //Immune wall
+                wattron(snake_win, COLOR_PAIR(2));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+            else if (map[i - 4][j - 4] == WALL) { //wall
+                wattron(snake_win, COLOR_PAIR(12));
+                mvwprintw(snake_win, i, j * 2, "  ");
+
+            }
+            else if (map[i - 4][j - 4] == SNAKE_HEAD) {  //head of snake
+                wattron(snake_win, COLOR_PAIR(SNAKE_HEAD));
+                mvwprintw(snake_win, i, j * 2, "  ");
+
+            }
+            else if (map[i - 4][j - 4] == SNAKE_BODY) {  //body of snake
+                wattron(snake_win, COLOR_PAIR(SNAKE_BODY));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+            else if (map[i - 4][j - 4] == GROWTH_ITEM) {  // growth item
+                wattron(snake_win, COLOR_PAIR(GROWTH_ITEM));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+            else if (map[i - 4][j - 4] == POISON_ITEM) {  //posion item
+                wattron(snake_win, COLOR_PAIR(POISON_ITEM));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+            else if (map[i - 4][j - 4] == GATE) {  //Gate
+                wattron(snake_win, COLOR_PAIR(GATE));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+            else if (map[i - 4][j - 4] == X_ITEM) {  // new item
+                wattron(snake_win, COLOR_PAIR(2));
+                mvwprintw(snake_win, i, j * 2, "  ");
+            }
+        }
+    }
+    wrefresh(snake_win);
+}
 
 
 void updateMission(WINDOW* mission_win, Mission* m, Point* p) {
