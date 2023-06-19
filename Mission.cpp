@@ -1,6 +1,30 @@
 #include <iostream>
 #include "Mission.h"
 
+void Mission::setB(int x){
+    B = x;
+}
+void Mission::setGrowItem(int x){
+    growItem = x;
+}
+void Mission::setPoisonItem(int x){
+    poisonItem = x;
+}
+void Mission::setUseGate(int x){
+    useGate = x;
+}
+int Mission::getB(){
+    return B;
+}
+int Mission::getGrowItem(){
+    return growItem;
+}
+int Mission::getPoisonItem(){
+    return poisonItem;
+}
+int Mission::getUseGate(){
+    return useGate;
+}
 Mission::Mission() {
     B = 7;
     growItem = 3;
@@ -14,33 +38,14 @@ Mission::Mission() {
 };
 
 
-int Mission::getB(){
-    return B;
-}
-int Mission::getGrowItem(){
-    return growItem;
-}
-int Mission::getPoisonItem(){
-    return poisonItem;
-}
-int Mission::getUseGate(){
-    return useGate;
-}
 
 
-void Mission::setB(int x){
-    B = x;
+void Mission::updateAll(Point *p){
+    Mission::checkB(p);
+    Mission::checkGrowItem(p);
+    Mission::checkPoisonItem(p);
+    Mission::checkUseGate(p);
 }
-void Mission::setGrowItem(int x){
-    growItem = x;
-}
-void Mission::setPoisonItem(int x){
-    poisonItem = x;
-}
-void Mission::setUseGate(int x){
-    useGate = x;
-}
-
 
 void Mission::checkB(Point *p){
     if(p->getCurrentLength() >= B) Bflag= true;
@@ -55,12 +60,6 @@ void Mission::checkUseGate(Point *p){
     if(p->getUseGate()>= useGate) useGateFlag = true;
 }
 
-void Mission::updateAll(Point *p){
-    Mission::checkB(p);
-    Mission::checkGrowItem(p);
-    Mission::checkPoisonItem(p);
-    Mission::checkUseGate(p);
-}
 
 
 bool Mission::getBflag(){ return Bflag;}
