@@ -1,11 +1,9 @@
 #include <iostream>
-#include <deque>
 #include "Snake_map.h"
+#include <deque>
 
 #ifndef __ITEM__
 #define __ITEM__
-
-
 struct ItemValue{
     int y, x;
     clock_t time;
@@ -18,19 +16,18 @@ struct ItemValue{
         time = time_;
     }
 };
-
 class Item {
 private:
     int total_item;
     ItemValue iv[3];
 public:
     Item();
-    void addTotalItem();
-    void minusTotalItem();
-
     void produceItem();
     void removeItem();
     void removeItem(int y, int x);
+    void addTotalItem();
+    void minusTotalItem();
+
 };
 
 #endif
